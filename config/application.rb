@@ -29,5 +29,10 @@ module CitibikePlannerApi
 
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths += Dir[Rails.root.join('app', 'services', '{*/}')]
+
+    config.action_dispatch.default_headers = {
+        'Access-Control-Allow-Origin' => '*',
+        'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
+    }
   end
 end
