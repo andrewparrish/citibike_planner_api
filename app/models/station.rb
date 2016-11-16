@@ -26,7 +26,7 @@ class Station < ApplicationRecord
   extend HelperPlugin
 
   def to_json
-    to_hash.to_json
+    as_json.merge({ maps_url: google_maps_url })
   end
 
   def self.converted_hash
@@ -50,5 +50,11 @@ class Station < ApplicationRecord
         lastCommunicationTime: 'last_update',
         landmark: 'landmark'
     }
+  end
+
+  private
+
+  def google_maps_url
+    "https://maps.googleapis.com/maps/api/staticmap?center=#{latitude},#{longitude}&markers=#{latitude},#{longitude}&zoom=20&size=400x250&maptype=roadmap&key=#{Rails.application.secrets.google_maps_key}"
   end
 end
