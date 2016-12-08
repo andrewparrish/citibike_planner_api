@@ -24,6 +24,9 @@ gem 'resque'
 
 gem 'rufus-scheduler'
 
+gem 'devise_token_auth'
+
+gem 'omniauth'
 
 gem 'sinatra', github: 'sinatra'
 group :development, :test do
