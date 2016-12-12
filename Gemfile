@@ -28,6 +28,11 @@ gem 'devise_token_auth'
 
 gem 'omniauth'
 
+# Mailing
+gem 'mailgun_rails'
+
+gem 'rack-cors'
+
 gem 'sinatra', github: 'sinatra'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
