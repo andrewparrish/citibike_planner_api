@@ -17,6 +17,9 @@ Rails.application.configure do
       api_key: ENV['MAILGUN_API_KEY'],
       domain: ENV['MAILGUN_DOMAIN']
   }
+  config.action_mailer.default_url_options = { :host => 'localhost' }
+
+  config.action_controller.action_on_unpermitted_parameters = :log
 
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
@@ -33,7 +36,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
