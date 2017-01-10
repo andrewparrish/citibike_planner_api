@@ -3,9 +3,9 @@ require 'resque/server'
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
-  get 'station/index'
-
-  get 'station/show'
+  resources 'station', only: [:show] do
+    put 'favorite', to: 'station#favorite'
+  end
 
   get 'stations', to: 'station#index'
 
