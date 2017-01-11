@@ -25,6 +25,8 @@
 class Station < ApplicationRecord
   extend HelperPlugin
 
+  has_and_belongs_to_many :users
+
   def to_json
     as_json.merge({ maps_url: google_maps_url })
   end
