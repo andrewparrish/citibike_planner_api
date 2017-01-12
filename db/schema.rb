@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110234050) do
+ActiveRecord::Schema.define(version: 20170112012524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "histograms", force: :cascade do |t|
+    t.integer  "week_day",        null: false
+    t.integer  "month",           null: false
+    t.integer  "day_of_month",    null: false
+    t.integer  "year",            null: false
+    t.integer  "hour",            null: false
+    t.integer  "minute",          null: false
+    t.datetime "start_date",      null: false
+    t.datetime "end_time",        null: false
+    t.integer  "available_bikes"
+    t.integer  "available_docks"
+    t.index ["day_of_month"], name: "index_histograms_on_day_of_month", using: :btree
+    t.index ["hour"], name: "index_histograms_on_hour", using: :btree
+    t.index ["minute"], name: "index_histograms_on_minute", using: :btree
+    t.index ["month"], name: "index_histograms_on_month", using: :btree
+    t.index ["week_day"], name: "index_histograms_on_week_day", using: :btree
+    t.index ["year"], name: "index_histograms_on_year", using: :btree
+  end
 
   create_table "stations", force: :cascade do |t|
     t.string   "station_name",                    null: false
