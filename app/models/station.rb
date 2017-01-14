@@ -22,10 +22,13 @@
 #  landmark        :string
 #
 
-class Station < ApplicationRecord
+class Station < ActiveRecord::Base
   extend HelperPlugin
 
   has_and_belongs_to_many :users
+  has_many :histograms
+
+  after_save :generate_histogram
 
   def to_json
     as_json.merge({ maps_url: google_maps_url })
@@ -55,6 +58,10 @@ class Station < ApplicationRecord
   end
 
   private
+
+  def generate_histogram
+    Redis.enqueue(GenerateHistogramService, self.attributes.symbolize_keys, self.last_update)
+  end
 
   def google_maps_url
     "https://maps.googleapis.com/maps/api/staticmap?center=#{latitude},#{longitude}&markers=#{latitude},#{longitude}&zoom=20&size=400x250&maptype=roadmap&key=#{Rails.application.secrets.google_maps_key}"

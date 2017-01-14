@@ -22,14 +22,15 @@ ActiveRecord::Schema.define(version: 20170112012524) do
     t.integer  "year",            null: false
     t.integer  "hour",            null: false
     t.integer  "minute",          null: false
-    t.datetime "start_date",      null: false
-    t.datetime "end_time",        null: false
+    t.datetime "time",            null: false
     t.integer  "available_bikes"
     t.integer  "available_docks"
+    t.integer  "station_id"
     t.index ["day_of_month"], name: "index_histograms_on_day_of_month", using: :btree
     t.index ["hour"], name: "index_histograms_on_hour", using: :btree
     t.index ["minute"], name: "index_histograms_on_minute", using: :btree
     t.index ["month"], name: "index_histograms_on_month", using: :btree
+    t.index ["station_id"], name: "index_histograms_on_station_id", using: :btree
     t.index ["week_day"], name: "index_histograms_on_week_day", using: :btree
     t.index ["year"], name: "index_histograms_on_year", using: :btree
   end
