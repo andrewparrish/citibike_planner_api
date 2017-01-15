@@ -8,7 +8,7 @@ module HelperPlugin
 
   def create_or_update_from_json(json)
     attr_hash = convert_hash(json)
-    self.exists?(json['id']) ? self.find(json['id']).update(attr_hash) : self.create_from_json(json)
+    self.exists?(json['id']) ? self.find(json['id']).update!(attr_hash) : self.create_from_json(json)
   end
 
   def convert_hash(json)

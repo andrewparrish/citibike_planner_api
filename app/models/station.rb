@@ -63,6 +63,10 @@ class Station < ActiveRecord::Base
     Resque.enqueue(GenerateHistogramService, self.attributes.symbolize_keys, self.last_update)
   end
 
+  def street_view_url
+    "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=40.720032,-73.988354&fov=90&heading=235&pitch=10&key=YOUR_API_KEY"
+  end
+
   def google_maps_url
     "https://maps.googleapis.com/maps/api/staticmap?center=#{latitude},#{longitude}&markers=#{latitude},#{longitude}&zoom=20&size=400x250&maptype=roadmap&key=#{Rails.application.secrets.google_maps_key}"
   end
