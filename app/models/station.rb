@@ -25,10 +25,16 @@
 class Station < ActiveRecord::Base
   extend HelperPlugin
 
+  # Associations
   has_and_belongs_to_many :users
   has_many :histograms
 
+  # Hooks
   after_save :generate_histogram
+
+
+  #Validations
+  validates :heading, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 360 }
 
   def to_json
     as_json.merge({ maps_url: google_maps_url })
@@ -64,7 +70,7 @@ class Station < ActiveRecord::Base
   end
 
   def street_view_url
-    "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=40.720032,-73.988354&fov=90&heading=235&pitch=10&key=YOUR_API_KEY"
+    "https://maps.googleapis.com/maps/api/streetview?size=400x250&location=#{latitude},#{longitude}&fov=90&heading=#{heading || 0}&pitch=10&key=#{Rails.application.secrets.google_maps_key}"
   end
 
   def google_maps_url

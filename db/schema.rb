@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112012524) do
+ActiveRecord::Schema.define(version: 20170115230419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170112012524) do
     t.boolean  "test_station",    default: false
     t.datetime "last_update"
     t.string   "landmark"
+    t.integer  "heading"
   end
 
   create_table "stations_users", id: false, force: :cascade do |t|
