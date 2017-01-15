@@ -60,7 +60,7 @@ class Station < ActiveRecord::Base
   private
 
   def generate_histogram
-    Resque.enqueue(GenerateHistogramService, self.attributes.symbolize_keys, self.last_update)
+    Resque.enqueue(GenerateHistogramService, self.id, self.available_bikes, self.available_docks, self.last_update)
   end
 
   def street_view_url
