@@ -5,9 +5,7 @@ class GenerateHistogramService
     Histogram.find_or_create_by!(histogram_data(station_hash, time.beginning_of_minute))
   end
 
-  private
-
-  def histogram_data(station_hash, time)
+  def self.histogram_data(station_hash, time)
     {
         station_id: station_hash[:id],
         week_day: time.wday,
