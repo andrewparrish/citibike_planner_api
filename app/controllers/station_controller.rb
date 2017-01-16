@@ -15,7 +15,7 @@ class StationController < ApplicationController
   end
 
   def street_view
-    render json: { street_view_url: @station.street_view_url }
+    render json: { street_view_url: @station.street_view_url(params[:width]) }
   end
 
   def last_weeks_stats

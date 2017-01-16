@@ -63,8 +63,8 @@ class Station < ActiveRecord::Base
     }
   end
 
-  def street_view_url
-    "https://maps.googleapis.com/maps/api/streetview?size=400x250&location=#{latitude},#{longitude}&fov=90&heading=#{heading || 0}&pitch=10&key=#{Rails.application.secrets.google_maps_key}"
+  def street_view_url(width)
+    "https://maps.googleapis.com/maps/api/streetview?size=#{width || 400}x250&location=#{latitude},#{longitude}&fov=90&heading=#{heading || 0}&pitch=10&key=#{Rails.application.secrets.google_maps_key}"
   end
 
   private
