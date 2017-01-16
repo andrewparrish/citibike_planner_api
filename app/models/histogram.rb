@@ -17,4 +17,6 @@
 
 class Histogram < ActiveRecord::Base
   belongs_to :station
+
+  scope :last_week, ->(station_id) { where("time > ? AND station_id = ?", (Time.now - 1.week), station_id) }
 end

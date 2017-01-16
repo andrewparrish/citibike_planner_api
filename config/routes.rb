@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources 'station', only: [:show] do
     put 'favorite', to: 'station#favorite'
+    get 'streetview', to: 'station#street_view'
   end
 
   get 'stations', to: 'station#index'
