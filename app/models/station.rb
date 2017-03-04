@@ -32,7 +32,6 @@ class Station < ActiveRecord::Base
   # Hooks
   after_save :generate_histogram
 
-
   #Validations
   validates :heading, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 360 }
 

@@ -22,6 +22,8 @@ gem 'redis'
 
 gem 'resque'
 
+gem 'resque-scheduler'
+
 gem 'rufus-scheduler'
 
 gem 'devise_token_auth'
