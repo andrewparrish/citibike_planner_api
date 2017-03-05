@@ -69,7 +69,7 @@ class Station < ActiveRecord::Base
   private
 
   def generate_histogram
-    Resque.enqueue(GenerateHistogramService, self.id, self.available_bikes, self.available_docks, self.last_update)
+    Resque.enqueue(GenerateHistogramService, self.id, self.available_bikes, self.available_docks, self.last_update.to_s)
   end
 
   def google_maps_url
