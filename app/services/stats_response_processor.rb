@@ -34,7 +34,14 @@ class StatsResponseProcessor
   end
 
   def get_histograms
-    time_range_blocks.map { |block| Histogram.between(@station_id, block.first..block.last).to_a }
+    time_range_blocks.map { |block| Histogram.between(@station_id, block.first..block.last).to_a.sort_by { |histo| histo.time } }
+  end
+
+  # Find the last histogram in the set (before all empty)
+  def last_histogram
+    last = 0
+    histograms.each_with_index { |histos, index| last = index unless histos.empty? }
+    last
   end
 
   def time_range
@@ -43,29 +50,27 @@ class StatsResponseProcessor
 
   def get_time_range
     range = [time_back]
-    @count.times.to_a.slice(1..-1).each do |index|
-      range << range.last + (index * @interval).minutes
-    end
-    range
+    (1..@count).each { |_index | range << (range.last + @interval.minutes) }
+    range.uniq
   end
 
   def get_data
     {
-        bikes: get_min_bikes,
-        docks: get_min_docks
+        bikes: get_min_bikes.slice(0, last_histogram + 1),
+        docks: get_min_docks.slice(0, last_histogram + 1)
     }
   end
 
   def get_min_docks
-    histograms.map { |histos| histos.empty? ? "" : histos.map(&:available_docks).min }
+    histograms.map { |histos| histos.empty? ? "" : histos.map(&:available_docks).last }
   end
 
   def get_min_bikes
-    histograms.map { |histos| histos.empty? ? "" : histos.map(&:available_bikes).min }
+    histograms.map { |histos| histos.empty? ? "" : histos.map(&:available_bikes).last }
   end
 
   def get_legend
-    time_range.slice(1..-2).to_a
+    time_range.slice(0, last_histogram + 1)
   end
 
   def station

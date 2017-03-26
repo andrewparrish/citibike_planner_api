@@ -40,7 +40,7 @@ class Station < ActiveRecord::Base
   end
 
   def last_update=(time)
-    write_attribute(:last_update, Time.parse(time + " EST"))
+    write_attribute(:last_update, Time.find_zone('Eastern Time (US & Canada)').parse(time))
   end
 
   def self.converted_hash
