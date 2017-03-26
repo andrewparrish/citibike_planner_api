@@ -1,5 +1,5 @@
 class StationController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :stats]
   before_action :get_station, except: [:index]
   def index
     @stations = Station.all
@@ -20,6 +20,10 @@ class StationController < ApplicationController
 
   def last_weeks_stats
     render json: { data: Histogram.last_week(@station.id) }
+  end
+
+  def stats
+    render json: StatsResponseProcessor.new(@station.id).perform
   end
 
   private

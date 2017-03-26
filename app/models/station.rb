@@ -39,6 +39,10 @@ class Station < ActiveRecord::Base
     as_json.merge({ maps_url: google_maps_url })
   end
 
+  def last_update=(time)
+    write_attribute(:last_update, Time.parse(time + " EST"))
+  end
+
   def self.converted_hash
     {
         id: 'id',

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources 'station', only: [:show] do
     put 'favorite', to: 'station#favorite'
     get 'streetview/:width', to: 'station#street_view'
+    get 'stats', to: 'station#stats'
   end
 
   get 'stations', to: 'station#index'
