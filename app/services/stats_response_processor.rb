@@ -57,24 +57,15 @@ class StatsResponseProcessor
   end
 
   def get_min_docks
-    # histograms.reject(&:empty?).map { |histos| histos.map(&:available_docks).min }
-    histograms.map do |histos|
-      histos.empty? ? "" : histos.map(&:available_docks).min
-    end
+    histograms.map { |histos| histos.empty? ? "" : histos.map(&:available_docks).min }
   end
 
   def get_min_bikes
-    # histograms.reject(&:empty?).map { |histos| histos.map(&:available_bikes).min }
-    histograms.map do |histos|
-      histos.empty? ? "" : histos.map(&:available_bikes).min
-    end
+    histograms.map { |histos| histos.empty? ? "" : histos.map(&:available_bikes).min }
   end
 
   def get_legend
-    # time_range.slice(1..-2).each_with_index.reject { |_time, index| histograms[index].empty? }.map { |time, _index| time }
-    time_range.slice(1..-2).each_with_index.map do |time, index|
-      time
-    end
+    time_range.slice(1..-2).to_a
   end
 
   def station
