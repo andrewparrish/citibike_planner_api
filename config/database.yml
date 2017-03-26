@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: citibike_planner_api_production
-  username: citibike_planner_api
-  password: <%= ENV['CITIBIKE_PLANNER_API_DATABASE_PASSWORD'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
