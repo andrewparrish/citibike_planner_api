@@ -1,4 +1,4 @@
 update_stations:
   every:
-    - "1m"
+    - "3m"
   class: "UpdateStations"
