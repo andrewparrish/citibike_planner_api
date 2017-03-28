@@ -1,3 +1,5 @@
+require File.expand_path(File.dirname(__FILE__) + "/../environment")
+
 require 'uri'
 require 'resque'
 require 'resque-scheduler'
